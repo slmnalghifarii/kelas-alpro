@@ -2,7 +2,7 @@
 
 int main(){
     puts("Hello World");
-    puts("Nama Saya Umar");
+    puts("Nama Saya Salman");
     
     return 0;
 }
