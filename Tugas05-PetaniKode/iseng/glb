@@ -1,0 +1,38 @@
+#include <iostream>
+#include <gltf/gltf.h>
+
+int main() {
+    // GltfScene digunakan untuk membaca berkas GLB
+    gltf::GltfScene scene;
+
+    // Baca berkas GLB
+    if (scene.LoadScene("path/to/your/model.glb")) {
+        // Tampilkan informasi dasar tentang model
+        std::cout << "Model Information:" << std::endl;
+        std::cout << "  Nodes: " << scene.nodes.size() << std::endl;
+        std::cout << "  Meshes: " << scene.meshes.size() << std::endl;
+        std::cout << "  Materials: " << scene.materials.size() << std::endl;
+        std::cout << "  Textures: " << scene.textures.size() << std::endl;
+        std::cout << "  Animations: " << scene.animations.size() << std::endl;
+
+        // Misalnya, Anda dapat mengekstrak informasi tentang mesh pertama
+        if (!scene.meshes.empty()) {
+            const auto& mesh = scene.meshes[0];
+            std::cout << "\nInformation about the first mesh:" << std::endl;
+            std::cout << "  Name: " << mesh.name << std::endl;
+            std::cout << "  Primitives: " << mesh.primitives.size() << std::endl;
+
+            // Output informasi tambahan tentang masing-masing primitif
+            for (const auto& primitive : mesh.primitives) {
+                std::cout << "    Attributes: " << primitive.attributes.size() << std::endl;
+                std::cout << "    Indices: " << (primitive.indices >= 0 ? "Yes" : "No") << std::endl;
+                std::cout << "    Material: " << primitive.material << std::endl;
+            }
+        }
+    } else {
+        std::cerr << "Failed to load GLB file." << std::endl;
+        return 1;
+    }
+
+    return 0;
+}

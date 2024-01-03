@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <math.h>
+
+// Fungsi untuk menghitung percepatan sudut
+double calculate_acceleration(double theta, double omega, double length, double g) {
+    return -g / length * sin(theta);
+}
+
+// Metode Euler untuk menghitung perubahan sudut dan kecepatan sudut
+void euler_method(double *theta, double *omega, double length, double g, double delta_t) {
+    double alpha = calculate_acceleration(*theta, *omega, length, g);
+    *theta += *omega * delta_t;
+    *omega += alpha * delta_t;
+}
+
+int main() {
+    // Parameter pendulum
+    double length = 1.0;  // Panjang pendulum
+    double g = 9.8;       // Percepatan gravitasi
+    double theta = M_PI / 4.0;  // Sudut awal dalam radian
+    double omega = 0.0;   // Kecepatan sudut awal
+
+    // Delta waktu untuk metode Euler (secara sederhana, Anda dapat menyesuaikannya)
+    double delta_t = 0.05;
+
+    // Simulasi
+    for (int i = 0; i < 200; ++i) {
+        // Output posisi pendulum
+        printf("Step %d: Theta = %.4f, Omega = %.4f\n", i, theta, omega);
+
+        // Metode Euler untuk menghitung perubahan sudut dan kecepatan sudut
+        euler_method(&theta, &omega, length, g, delta_t);
+    }
+
+    return 0;
+}
