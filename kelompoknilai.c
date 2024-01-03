@@ -59,4 +59,8 @@ int main() {
     calcNilai(nama, NIM, tugas, quiz, UTS, UAS);
 
  return 0;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ede8245b306ba3c91761482847a4aab7d731e4f2
